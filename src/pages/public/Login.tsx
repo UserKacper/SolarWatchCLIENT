@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { LoginForm } from "../features/login-form/LoginForm";
-import { isLocalStorageTokenExisting } from "../stores/auth-store";
+import { LoginForm } from "../../features/login-form/LoginForm";
+import { isLocalStorageTokenExisting } from "../../stores/auth-store";
 import { useEffect } from "react";
 
 const Login = () => {

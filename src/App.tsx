@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import ProtectedRoutesWrapper from "./pages/protected/ProtectedRoutesWrapper";
+import Login from "./pages/public/Login";
+import Register from "./pages/public/Register";
+import ProtectedRoutesWrapper from "./pages/wrapper/ProtectedRoutesWrapper";
+import WelcomeUser from "./pages/protected/WelcomeUser";
 
 export default function App() {
   return (
@@ -10,8 +11,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<ProtectedRoutesWrapper />}>
-          <Route path="/welcome" />
-          <Route path="/wather" />
+          <Route path="/" element={<WelcomeUser />} />
         </Route>
       </Routes>
     </BrowserRouter>

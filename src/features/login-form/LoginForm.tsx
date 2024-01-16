@@ -3,16 +3,24 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../../comp
 import { Label } from "../../components/ui/label";
 import { Input } from "../../components/ui/input";
 import { handleLoginUser } from "../../lib/axios/login";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { handleInputChange } from "../../lib/user-inputChange/handleInputChange";
 import { TUserLogin } from "../../data/data-types-d";
-import { authStore } from "../../stores/auth-store";
+import { authStore, isLocalStorageTokenExisting } from "../../stores/auth-store";
+import { useNavigate } from "react-router-dom";
 
 export function LoginForm() {
   const [loginUserData, setLoginUserData] = useState<TUserLogin>({
     email: "",
     password: "",
   });
+  const navigate = useNavigate()
+  const token = isLocalStorageTokenExisting()
+  useEffect(() => {
+    if (token) {
+      navigate("/")
+    }
+  }, [token, navigate])
 
   const { setLoggedInUser } = authStore()
 

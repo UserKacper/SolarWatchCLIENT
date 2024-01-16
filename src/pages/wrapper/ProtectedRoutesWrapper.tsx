@@ -3,15 +3,24 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { isLocalStorageTokenExisting } from "../../stores/auth-store";
 
 const ProtectedRoutesWrapper = () => {
-  //TODO if user not logged in then redirect to login
   const navigate = useNavigate()
   const isToken = isLocalStorageTokenExisting()
 
-  useEffect(() => {
-    if (!isToken) navigate('/login')
-  }, [isToken, navigate])
+  const logoutUserIfNotToken = async () => {
+    if (!isToken) {
+      await navigate('/login');
+    }
+  }
 
-  return <><Outlet /></>;
+  useEffect(() => {
+    const fetchData = async () => {
+      await logoutUserIfNotToken();
+    };
+    fetchData()
+  });
+
+
+  return <Outlet />
 };
 
 export default ProtectedRoutesWrapper;
